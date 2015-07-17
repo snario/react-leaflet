@@ -63,7 +63,7 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -78,6 +78,8 @@ var _react2 = _interopRequireDefault(_react);
 var _reactLeaflet = require('react-leaflet');
 
 var EventsExample = (function (_Component) {
+  _inherits(EventsExample, _Component);
+
   function EventsExample() {
     _classCallCheck(this, EventsExample);
 
@@ -91,8 +93,6 @@ var EventsExample = (function (_Component) {
     };
   }
 
-  _inherits(EventsExample, _Component);
-
   _createClass(EventsExample, [{
     key: 'handleClick',
     value: function handleClick() {
@@ -103,22 +103,28 @@ var EventsExample = (function (_Component) {
     value: function handleLocationFound(e) {
       this.setState({
         hasLocation: true,
-        latlng: e.latlng
+        latlng: e.latlng,
+        accuracy: e.accuracy
       });
     }
   }, {
     key: 'render',
     value: function render() {
       var marker = this.state.hasLocation ? _react2['default'].createElement(
-        _reactLeaflet.Marker,
-        { position: this.state.latlng },
+        _reactLeaflet.LayersContainer,
+        null,
+        _react2['default'].createElement(_reactLeaflet.Circle, { center: this.state.latlng, radius: this.state.accuracy }),
         _react2['default'].createElement(
-          _reactLeaflet.Popup,
-          null,
+          _reactLeaflet.Marker,
+          { position: this.state.latlng },
           _react2['default'].createElement(
-            'span',
+            _reactLeaflet.Popup,
             null,
-            'You are here'
+            _react2['default'].createElement(
+              'span',
+              null,
+              'You are here'
+            )
           )
         )
       ) : null;
@@ -129,8 +135,7 @@ var EventsExample = (function (_Component) {
           center: this.state.latlng,
           zoom: 13,
           onClick: this.handleClick.bind(this),
-          onLocationfound: this.handleLocationFound.bind(this),
-          length: 4 },
+          onLocationfound: this.handleLocationFound.bind(this) },
         _react2['default'].createElement(_reactLeaflet.TileLayer, {
           url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
           attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -155,7 +160,7 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -170,6 +175,8 @@ var _react2 = _interopRequireDefault(_react);
 var _reactLeaflet = require('react-leaflet');
 
 var SimpleExample = (function (_Component) {
+  _inherits(SimpleExample, _Component);
+
   function SimpleExample() {
     _classCallCheck(this, SimpleExample);
 
@@ -180,8 +187,6 @@ var SimpleExample = (function (_Component) {
       zoom: 13
     };
   }
-
-  _inherits(SimpleExample, _Component);
 
   _createClass(SimpleExample, [{
     key: 'render',
@@ -228,6 +233,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -241,15 +248,13 @@ var _react2 = _interopRequireDefault(_react);
 var _reactLeaflet = require('react-leaflet');
 
 var VectorLayersExample = (function (_Component) {
+  _inherits(VectorLayersExample, _Component);
+
   function VectorLayersExample() {
     _classCallCheck(this, VectorLayersExample);
 
-    if (_Component != null) {
-      _Component.apply(this, arguments);
-    }
+    _get(Object.getPrototypeOf(VectorLayersExample.prototype), 'constructor', this).apply(this, arguments);
   }
-
-  _inherits(VectorLayersExample, _Component);
 
   _createClass(VectorLayersExample, [{
     key: 'render',

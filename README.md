@@ -194,6 +194,11 @@ The Popup children will be rendered as its content using `React.renderToStaticMa
 
 #### Other Layers
 
+##### LayersContainer
+
+This is a simple container component only passing its `map` property to its children.  
+It can be used to easily group layers together.
+
 ##### Implemented but needing testing and documentation
 
 - FeatureGroup

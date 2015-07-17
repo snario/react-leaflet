@@ -9,6 +9,7 @@ import CircleMarker from './CircleMarker';
 import FeatureGroup from './FeatureGroup';
 import GeoJson from './GeoJson';
 import ImageOverlay from './ImageOverlay';
+import LayersContainer from './LayersContainer';
 import Map from './Map';
 import MapComponent from './MapComponent';
 import MapLayer from './MapLayer';
@@ -39,6 +40,7 @@ export default {
   FeatureGroup,
   GeoJson,
   ImageOverlay,
+  LayersContainer,
   Map,
   MapComponent,
   MapLayer,
